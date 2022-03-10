@@ -1,7 +1,7 @@
 package com.edurda77.currencyconverter.model
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
-data class Gbr(
+data class Gbp(
     @SerializedName("CharCode")
     val charCode: String,
     @SerializedName("Nominal")

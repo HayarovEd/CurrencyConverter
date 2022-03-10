@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class DataOfValute(
-    @SerializedName("Data")
+    @SerializedName("Date")
     val date: String,
     @SerializedName("Timestamp")
     val timestamp: String,
