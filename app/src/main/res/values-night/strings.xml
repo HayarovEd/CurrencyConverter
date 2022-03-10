@@ -3,4 +3,6 @@
     <string name="currency">Валюты</string>
     <string name="currency_name">Валюта:</string>
     <string name="nominal">Номинал</string>
+    <string name="convert_currency_rub">Конвертировать валюту в рубли</string>
+    <string name="div">/</string>
 </resources>

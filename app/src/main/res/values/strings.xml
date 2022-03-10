@@ -5,4 +5,9 @@
     <string name="currency_name">Валюта:</string>
     <string name="value_in_rub">Курс (в рублях):</string>
     <string name="nominal">Номинал</string>
+    <string name="convert_currency_rub">Конвертировать валюту в рубли</string>
+    <string name="multi">x</string>
+    <string name="calc">Расчет</string>
+    <string name="convert_rubl_currency">Конвертировать рубли в валюту</string>
+    <string name="div">/</string>
 </resources>

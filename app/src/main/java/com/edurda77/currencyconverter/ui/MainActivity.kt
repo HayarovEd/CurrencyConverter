@@ -1,5 +1,6 @@
 package com.edurda77.currencyconverter.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -248,9 +249,27 @@ class MainActivity : AppCompatActivity() {
             this,
             LinearLayoutManager.VERTICAL, false
         )
+        val stateClickListener: CurrencyAdapter.OnStateClickListener =
+            object : CurrencyAdapter.OnStateClickListener {
+                override fun onStateClick(currency: Currency, position: Int) {
+                    val intent = Intent(this@MainActivity, ConvertorActivity::class.java)
+                    intent.putExtra(Currency::class.java.simpleName, currency)
 
+                    startActivity(intent)
+                    /*Thread {
+                        val iDMovie = goIDMovie.getReposForIDMovieSync(movie)
 
-        recyclerView.adapter = CurrencyAdapter(currencyes)
+                        runOnUiThread {
+                            val intent = Intent(this@MainActivity, FilmActivity::class.java)
+                            intent.putExtra(Movie::class.java.simpleName, iDMovie)
+
+                            startActivity(intent)
+                        }
+                    }.start()*/
+                }
+            }
+
+        recyclerView.adapter = CurrencyAdapter(currencyes, stateClickListener)
 
 
     }

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    tools:context=".ui.ConvertorActivity">
+
+
+    <TextView
+        android:id="@+id/convertor_name_currency"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="8dp"
+        android:background="@color/purple_200"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="8dp"
+        android:background="@color/purple_200"
+        android:gravity="center"
+        android:text="@string/convert_currency_rub"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/convertor_name_currency" />
+
+    <EditText
+        android:id="@+id/convertor_count_rubl"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@color/teal_200"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toEndOf="@+id/convertor_multi"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/convertor_multi"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@color/teal_200"
+        android:text="@string/multi"
+        app:layout_constraintStart_toEndOf="@+id/convertor_price"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/convertor_result2"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="8dp"
+        android:background="@color/purple_200"
+        app:layout_constraintTop_toBottomOf="@+id/convertor_calc2"
+        tools:layout_editor_absoluteX="2dp" />
+
+    <EditText
+        android:id="@+id/convertor_rubl_count"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@color/teal_200"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/convertor_div"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/convertor_calc2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/calc"
+        app:layout_constraintTop_toBottomOf="@+id/convertor_rubl_count"
+        tools:layout_editor_absoluteX="50dp" />
+
+    <TextView
+        android:id="@+id/convertor_course"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@color/teal_200"
+        app:layout_constraintStart_toEndOf="@+id/convertor_div"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="8dp"
+        android:background="@color/purple_200"
+        android:gravity="center"
+        android:text="@string/convert_rubl_currency"
+        app:layout_constraintTop_toBottomOf="@+id/convertor_result1"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/convertor_calc1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/calc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/convertor_count_rubl" />
+
+    <TextView
+        android:id="@+id/convertor_div"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+
+        android:layout_margin="8dp"
+        android:background="@color/teal_200"
+        android:text="@string/div"
+        app:layout_constraintEnd_toStartOf="@+id/convertor_course"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/convertor_rubl_count"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/convertor_result1"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="8dp"
+        android:background="@color/purple_200"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/convertor_calc1" />
+
+    <TextView
+        android:id="@+id/convertor_price"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@color/teal_200"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
