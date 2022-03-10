@@ -12,7 +12,13 @@
         android:textSize="16sp"
         android:text="@string/currency_name"
         />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nominal_currency"
+        android:textSize="16sp"
+        android:text="@string/nominal"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

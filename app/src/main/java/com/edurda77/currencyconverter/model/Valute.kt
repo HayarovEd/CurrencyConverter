@@ -1,0 +1,40 @@
+package com.edurda77.currencyconverter.model
+
+import java.io.Serializable
+
+data class Valute(
+    val amd: Amd,
+    val aud: Aud,
+    val azn: Azn,
+    val bgn: Bgn,
+    val brl: Brl,
+    val byn: Byn,
+    val cad: Cad,
+    val chf: Chf,
+    val cny: Cny,
+    val czk: Czk,
+    val dkk: Dkk,
+    val eur: Eur,
+    val gbr: Gbr,
+    val hkd: Hkd,
+    val huf: Huf,
+    val inr: Inr,
+    val jpy: Jpy,
+    val kgs: Kgs,
+    val krw: Krw,
+    val kzt: Kzt,
+    val mdl: Mdl,
+    val nok: Nok,
+    val pln: Pln,
+    val ron: Ron,
+    val sek: Sek,
+    val sgd: Sgd,
+    val tjs: Tjs,
+    val tmt: Tmt,
+    val tray: Try,
+    val uah: Uah,
+    val usd: Usd,
+    val uzs: Uzs,
+    val xdr: Xdr,
+    val zar: Zar
+) : Serializable

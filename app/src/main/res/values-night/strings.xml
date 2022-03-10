@@ -2,4 +2,5 @@
 <resources>
     <string name="currency">Валюты</string>
     <string name="currency_name">Валюта:</string>
+    <string name="nominal">Номинал</string>
 </resources>
