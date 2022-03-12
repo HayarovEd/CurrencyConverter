@@ -10,4 +10,5 @@
     <string name="calc">Расчет</string>
     <string name="convert_rubl_currency">Конвертировать рубли в валюту</string>
     <string name="div">/</string>
+    <string name="sum_of_rubl">Введите сумму в рублях</string>
 </resources>

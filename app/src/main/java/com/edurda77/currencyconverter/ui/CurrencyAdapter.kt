@@ -1,5 +1,4 @@
-package com.edurda77.filmlibrary.ui
-
+package com.edurda77.currencyconverter.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

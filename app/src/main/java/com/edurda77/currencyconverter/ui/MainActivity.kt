@@ -1,17 +1,14 @@
 package com.edurda77.currencyconverter.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.edurda77.currencyconverter.R
 import com.edurda77.currencyconverter.app
 import com.edurda77.currencyconverter.databinding.ActivityMainBinding
 import com.edurda77.currencyconverter.domain.CurrencyUseCase
 import com.edurda77.currencyconverter.model.Currency
-import com.edurda77.currencyconverter.model.DataOfValute
-import com.edurda77.filmlibrary.ui.CurrencyAdapter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

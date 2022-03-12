@@ -5,4 +5,5 @@
     <string name="nominal">Номинал</string>
     <string name="convert_currency_rub">Конвертировать валюту в рубли</string>
     <string name="div">/</string>
+    <string name="sum_of_rubl">Введите сумму в рублях</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.edurda77.filmlibrary.ui
+package com.edurda77.currencyconverter.ui
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -24,9 +24,9 @@ class CurrencyHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     @SuppressLint("SetTextI18n")
     fun bind(currency: Currency) {
-        nameCurrency?.text = nameCurrency?.text.toString() + currency.name
-        valueCurrency?.text = valueCurrency?.text.toString() + currency.value.toString()
-        nominalCurrency?.text = nominalCurrency?.text.toString() + currency.nominal
+        nameCurrency?.text =  currency.name
+        valueCurrency?.text = currency.value.toString()
+        nominalCurrency?.text =  currency.nominal.toString()
 
 
     }
