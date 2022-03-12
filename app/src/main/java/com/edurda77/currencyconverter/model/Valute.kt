@@ -28,7 +28,7 @@ data class Valute(
     val dkk: Dkk,
     @SerializedName("EUR")
     val eur: Eur,
-    @SerializedName("GBR")
+    @SerializedName("GBP")
     val gbp: Gbp,
     @SerializedName("HKD")
     val hkd: Hkd,
