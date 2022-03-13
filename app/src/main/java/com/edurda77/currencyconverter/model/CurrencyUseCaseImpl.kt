@@ -12,6 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.IllegalStateException
 
 const val BASE_URL = "https://www.cbr-xml-daily.ru/"
 
@@ -29,24 +30,27 @@ class CurrencyUseCaseImpl : CurrencyUseCase {
     }
 
     override fun getCurrenciesAsync(
-        onSuccess: (DataOfValute) -> Unit,
-        OnError: (Throwable) -> Unit
+        onSuccess: (DataOfValute?) -> Unit,
+        onError: (Throwable) -> Unit
     ) {
         api.getCurrency().enqueue(object : Callback<DataOfValute> {
             override fun onResponse(call: Call<DataOfValute>, response: Response<DataOfValute>) {
                 if (response.isSuccessful) {
-                    onSuccess(response.body() ?: throw IllegalStateException("Нулевой результат"))
+                    onSuccess(response.body()?: throw IllegalStateException("Нет данных"))
                 } else {
-                    OnError(Throwable("Неизвестная ошибка"))
+                    onError(Throwable("Ошибка 404"))
                 }
+            }
 
-            }
             override fun onFailure(call: Call<DataOfValute>, t: Throwable) {
-                OnError(t)
+                hideProgressBar()
+                onError(t)
             }
+
         })
     }
-    fun getMutableLiveData(context: Context) : MutableLiveData<DataOfValute> {
+}
+    /*fun getMutableLiveData(context: Context) : MutableLiveData<DataOfValute> {
 
         val mutableLiveData = MutableLiveData<DataOfValute>()
 
@@ -71,5 +75,4 @@ class CurrencyUseCaseImpl : CurrencyUseCase {
         })
 
         return mutableLiveData
-    }
-}
+    }*/

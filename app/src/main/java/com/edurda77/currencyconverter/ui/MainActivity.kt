@@ -17,7 +17,7 @@ import com.edurda77.currencyconverter.model.Currency
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val convertorViewModel = ConvertorViewModel()
+    private val convertorViewModel = ConvertorViewModel(this)
     private val currentJson: CurrencyUseCase by lazy { app.currencyUseCase }
     private val currentFromDb: CurrencyDao by lazy { app.currencyRepoDbImpl }
     private var currencyes = emptyList<Currency>().toMutableList()
@@ -25,18 +25,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        /*Thread {
-
-                /*currentFromDb.getCurrencies().forEach {
-                    currencyes.add(it)
-                }*/
-
-            runOnUiThread {
-                setOotRecycledView()
-
-            }
-
-        }.start()*/
+       // convertorViewModel.initData()
         setOotRecycledView()
     }
 
@@ -59,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = CurrencyAdapter(currencyes, stateClickListener)
         recyclerView.adapter = adapter
         //convertorViewModel.initData(this)
-        convertorViewModel.getGurrences(this).observe(this) { list ->
+        convertorViewModel.getGurrences().observe(this) { list ->
             //currencyes.clear()
             /*list.forEach {
                 currencyes.add(it)
