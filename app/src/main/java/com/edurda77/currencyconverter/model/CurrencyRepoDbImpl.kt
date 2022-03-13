@@ -1,6 +1,7 @@
 package com.edurda77.currencyconverter.model
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.edurda77.currencyconverter.domain.CurrenciesRoomDb
 import com.edurda77.currencyconverter.domain.CurrencyDao
@@ -19,7 +20,7 @@ class CurrencyRepoDbImpl(context: Context) : CurrencyDao {
         currencyDao.add(currency)
     }
 
-    override fun getCurrencies(): List<Currency> {
+    override fun getCurrencies(): LiveData<List<Currency>> {
         return currencyDao.getCurrencies()
     }
 
