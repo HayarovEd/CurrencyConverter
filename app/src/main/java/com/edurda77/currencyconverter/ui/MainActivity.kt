@@ -2,6 +2,7 @@ package com.edurda77.currencyconverter.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,8 @@ import com.edurda77.currencyconverter.domain.CurrencyUseCase
 import com.edurda77.currencyconverter.model.ConvertorViewModel
 import com.edurda77.currencyconverter.model.Currency
 import com.edurda77.currencyconverter.model.DataOfVolute
+import java.lang.Thread.sleep
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -26,17 +29,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val timeOfLoad = binding.timeOfLoad
         val updateButton = binding.newCourse
+
         updateButton.setOnClickListener {
-            Thread {
-                currentFromDb.clearAll()
-                val cache = currentJson.getCurrenciesSync()
-                if (cache != null) {
-                    runOnUiThread {
-                        timeOfLoad.text = cache.date
-                    }
-                    addData(cache)
-                }
-            }.start()
+            updateData()
 
         }
         Thread {
@@ -354,5 +349,19 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    private fun updateData() {
+        Thread {
+            currentFromDb.clearAll()
+            val cache = currentJson.getCurrenciesSync()
+            if (cache != null) {
+                runOnUiThread {
+                    binding.timeOfLoad.text = cache.date
+                    Toast.makeText(this, "Данные обновлены", Toast.LENGTH_SHORT).show()
+                }
+                addData(cache)
+            }
+        }.start()
+
+    }
 
 }
