@@ -11,6 +11,8 @@ interface CurrencyDao {
     fun add(currency: Currency)
     @Query("SELECT * FROM $CURRENCY_TABLE")
     fun getCurrencies(): LiveData<List<Currency>>
+    @Query("SELECT * FROM $CURRENCY_TABLE")
+    fun getCurrenciesT(): List<Currency>
     @Query(
         "UPDATE $CURRENCY_TABLE " +
                 "SET $CURRENCY_NOMINAL=:nominal, " +
@@ -19,4 +21,6 @@ interface CurrencyDao {
                 "WHERE $CURRENCY_CHAR_CODE=:charCode"
     )
     fun update(charCode: String, nominal: Int, name: String, value: Double)
+    @Query("DELETE FROM $CURRENCY_TABLE")
+    fun clearAll ()
 }

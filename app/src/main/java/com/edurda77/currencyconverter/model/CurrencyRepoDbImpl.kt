@@ -24,7 +24,15 @@ class CurrencyRepoDbImpl(context: Context) : CurrencyDao {
         return currencyDao.getCurrencies()
     }
 
+    override fun getCurrenciesT(): List<Currency> {
+        return currencyDao.getCurrenciesT()
+    }
+
     override fun update(charCode: String, nominal: Int, name: String, value: Double) {
         currencyDao.update(charCode,nominal,name,value)
+    }
+
+    override fun clearAll() {
+        currencyDao.clearAll()
     }
 }
