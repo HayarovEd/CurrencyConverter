@@ -311,7 +311,7 @@ class MainActivity : AppCompatActivity() {
 
             }
         }.start()
-        Thread {
+        /*Thread {
             val ert = currentFromDb.getCurrenciesT()
             ert.forEach {
                 currencyes.add(it)
@@ -319,8 +319,8 @@ class MainActivity : AppCompatActivity() {
                     setOotRecycledView()
                 }
             }
-        }.start()
-        //setOotRecycledView()
+        }.start()*/
+        setOotRecycledView()
     }
 
     private fun setOotRecycledView() {
@@ -339,19 +339,19 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-        /*val adapter = CurrencyAdapter(currencyes, stateClickListener)
+        val adapter = CurrencyAdapter(currencyes, stateClickListener)
         recyclerView.adapter = adapter
         //convertorViewModel.initData(this)
         convertorViewModel.getGurrences().observe(this) { list ->
             //currencyes.clear()
-            *//*list.forEach {
-                currencyes.add(it)
-            }*//*
+            //*list.forEach {
+                //currencyes.add(it)
+            //}*//*
             recyclerView.adapter = CurrencyAdapter(list, stateClickListener)
             adapter.notifyDataSetChanged()
-        }*/
+        }
 
-        recyclerView.adapter = CurrencyAdapter(currencyes, stateClickListener)
+        //recyclerView.adapter = CurrencyAdapter(currencyes, stateClickListener)
 
 
     }
