@@ -1,16 +1,14 @@
 package com.edurda77.currencyconverter.domain
 
-import android.content.Context
 import androidx.annotation.WorkerThread
-import com.edurda77.currencyconverter.model.DataOfValute
-import javax.security.auth.callback.Callback
+import com.edurda77.currencyconverter.model.DataOfVolute
 
 interface CurrencyUseCase {
     @WorkerThread
     @Throws(Throwable::class)
-    fun getCurrenciesSync(): DataOfValute?
+    fun getCurrenciesSync(): DataOfVolute?
     fun getCurrenciesAsync(
-        onSuccess: (DataOfValute?) -> Unit,
+        onSuccess: (DataOfVolute?) -> Unit,
         onError: (Throwable) -> Unit
     )
 

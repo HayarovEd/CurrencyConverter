@@ -3,7 +3,7 @@ package com.edurda77.currencyconverter.model
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class Valute(
+data class Volute(
     @SerializedName("AMD")
     val amd: Amd,
     @SerializedName("AUD")

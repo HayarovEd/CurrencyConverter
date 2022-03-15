@@ -1,18 +1,13 @@
 package com.edurda77.currencyconverter.model
 
-import android.content.Context
-import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
 import com.edurda77.currencyconverter.domain.CbrApi
 import com.edurda77.currencyconverter.domain.CurrencyUseCase
 import com.edurda77.currencyconverter.model.Utility.hideProgressBar
-import com.edurda77.currencyconverter.model.Utility.showProgressBar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.IllegalStateException
 
 const val BASE_URL = "https://www.cbr-xml-daily.ru/"
 
@@ -23,18 +18,18 @@ class CurrencyUseCaseImpl : CurrencyUseCase {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     private var api: CbrApi = retrofit.create(CbrApi::class.java)
-    override fun getCurrenciesSync(): DataOfValute? {
+    override fun getCurrenciesSync(): DataOfVolute? {
 
 
         return api.getCurrency().execute().body()
     }
 
     override fun getCurrenciesAsync(
-        onSuccess: (DataOfValute?) -> Unit,
+        onSuccess: (DataOfVolute?) -> Unit,
         onError: (Throwable) -> Unit
     ) {
-        api.getCurrency().enqueue(object : Callback<DataOfValute> {
-            override fun onResponse(call: Call<DataOfValute>, response: Response<DataOfValute>) {
+        api.getCurrency().enqueue(object : Callback<DataOfVolute> {
+            override fun onResponse(call: Call<DataOfVolute>, response: Response<DataOfVolute>) {
                 if (response.isSuccessful) {
                     onSuccess(response.body()?: throw IllegalStateException("Нет данных"))
                 } else {
@@ -42,7 +37,7 @@ class CurrencyUseCaseImpl : CurrencyUseCase {
                 }
             }
 
-            override fun onFailure(call: Call<DataOfValute>, t: Throwable) {
+            override fun onFailure(call: Call<DataOfVolute>, t: Throwable) {
                 hideProgressBar()
                 onError(t)
             }
@@ -50,29 +45,4 @@ class CurrencyUseCaseImpl : CurrencyUseCase {
         })
     }
 }
-    /*fun getMutableLiveData(context: Context) : MutableLiveData<DataOfValute> {
 
-        val mutableLiveData = MutableLiveData<DataOfValute>()
-
-        context.showProgressBar()
-
-        api.getCurrency().enqueue(object : Callback<DataOfValute> {
-            override fun onFailure(call: Call<DataOfValute>, t: Throwable) {
-                hideProgressBar()
-                val error = "error" + t.localizedMessage
-                Toast.makeText(context, error, Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(
-                call: Call<DataOfValute>,
-                response: Response<DataOfValute>
-            ) {
-                hideProgressBar()
-                val usersResponse = response.body()
-                usersResponse?.let { mutableLiveData.value = it }
-            }
-
-        })
-
-        return mutableLiveData
-    }*/

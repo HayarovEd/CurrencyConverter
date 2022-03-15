@@ -2,10 +2,7 @@ package com.edurda77.currencyconverter.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.currencyconverter.app
@@ -14,312 +11,46 @@ import com.edurda77.currencyconverter.domain.CurrencyDao
 import com.edurda77.currencyconverter.domain.CurrencyUseCase
 import com.edurda77.currencyconverter.model.ConvertorViewModel
 import com.edurda77.currencyconverter.model.Currency
+import com.edurda77.currencyconverter.model.DataOfVolute
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val convertorViewModel = ConvertorViewModel(this)
     private val currentJson: CurrencyUseCase by lazy { app.currencyUseCase }
     private val currentFromDb: CurrencyDao by lazy { app.currencyRepoDbImpl }
-    private var currencyes = emptyList<Currency>().toMutableList()
+    private var currencies = emptyList<Currency>().toMutableList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        Thread {
-            val cashe = currentJson.getCurrenciesSync()
-            //val crr = currentFromDb.getCurrenciesT()
-            if (cashe != null) {
-                /*currencyes.add(Currency(crr.valute.amd.charCode,
-                    crr.valute.amd.nominal,
-                    crr.valute.amd.name,
-                    crr.valute.amd.value ))*/
+        val timeOfLoad = binding.timeOfLoad
+        val updateButton = binding.newCourse
+        updateButton.setOnClickListener {
+            Thread {
                 currentFromDb.clearAll()
+                val cache = currentJson.getCurrenciesSync()
+                if (cache != null) {
+                    runOnUiThread {
+                        timeOfLoad.text = cache.date
+                    }
+                    addData(cache)
+                }
+            }.start()
 
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.amd.charCode,
-                        cashe.valute.amd.nominal,
-                        cashe.valute.amd.name,
-                        cashe.valute.amd.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.aud.charCode,
-                        cashe.valute.aud.nominal,
-                        cashe.valute.aud.name,
-                        cashe.valute.aud.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.azn.charCode,
-                        cashe.valute.azn.nominal,
-                        cashe.valute.azn.name,
-                        cashe.valute.azn.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.bgn.charCode,
-                        cashe.valute.bgn.nominal,
-                        cashe.valute.bgn.name,
-                        cashe.valute.bgn.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.brl.charCode,
-                        cashe.valute.brl.nominal,
-                        cashe.valute.brl.name,
-                        cashe.valute.brl.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.byn.charCode,
-                        cashe.valute.byn.nominal,
-                        cashe.valute.byn.name,
-                        cashe.valute.byn.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.cad.charCode,
-                        cashe.valute.cad.nominal,
-                        cashe.valute.cad.name,
-                        cashe.valute.cad.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.chf.charCode,
-                        cashe.valute.chf.nominal,
-                        cashe.valute.chf.name,
-                        cashe.valute.chf.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.cny.charCode,
-                        cashe.valute.cny.nominal,
-                        cashe.valute.cny.name,
-                        cashe.valute.cny.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.czk.charCode,
-                        cashe.valute.czk.nominal,
-                        cashe.valute.czk.name,
-                        cashe.valute.czk.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.dkk.charCode,
-                        cashe.valute.dkk.nominal,
-                        cashe.valute.dkk.name,
-                        cashe.valute.dkk.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.eur.charCode,
-                        cashe.valute.eur.nominal,
-                        cashe.valute.eur.name,
-                        cashe.valute.eur.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.gbp.charCode,
-                        cashe.valute.gbp.nominal,
-                        cashe.valute.gbp.name,
-                        cashe.valute.gbp.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.hkd.charCode,
-                        cashe.valute.hkd.nominal,
-                        cashe.valute.hkd.name,
-                        cashe.valute.hkd.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.huf.charCode,
-                        cashe.valute.huf.nominal,
-                        cashe.valute.huf.name,
-                        cashe.valute.huf.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.inr.charCode,
-                        cashe.valute.inr.nominal,
-                        cashe.valute.inr.name,
-                        cashe.valute.inr.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.jpy.charCode,
-                        cashe.valute.jpy.nominal,
-                        cashe.valute.jpy.name,
-                        cashe.valute.jpy.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.kgs.charCode,
-                        cashe.valute.kgs.nominal,
-                        cashe.valute.kgs.name,
-                        cashe.valute.kgs.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.krw.charCode,
-                        cashe.valute.krw.nominal,
-                        cashe.valute.krw.name,
-                        cashe.valute.krw.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.kzt.charCode,
-                        cashe.valute.kzt.nominal,
-                        cashe.valute.kzt.name,
-                        cashe.valute.kzt.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.mdl.charCode,
-                        cashe.valute.mdl.nominal,
-                        cashe.valute.mdl.name,
-                        cashe.valute.mdl.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.nok.charCode,
-                        cashe.valute.nok.nominal,
-                        cashe.valute.nok.name,
-                        cashe.valute.nok.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.pln.charCode,
-                        cashe.valute.pln.nominal,
-                        cashe.valute.pln.name,
-                        cashe.valute.pln.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.ron.charCode,
-                        cashe.valute.ron.nominal,
-                        cashe.valute.ron.name,
-                        cashe.valute.ron.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.sek.charCode,
-                        cashe.valute.sek.nominal,
-                        cashe.valute.sek.name,
-                        cashe.valute.sek.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.sgd.charCode,
-                        cashe.valute.sgd.nominal,
-                        cashe.valute.sgd.name,
-                        cashe.valute.sgd.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.tjs.charCode,
-                        cashe.valute.tjs.nominal,
-                        cashe.valute.tjs.name,
-                        cashe.valute.tjs.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.tmt.charCode,
-                        cashe.valute.tmt.nominal,
-                        cashe.valute.tmt.name,
-                        cashe.valute.tmt.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.tray.charCode,
-                        cashe.valute.tray.nominal,
-                        cashe.valute.tray.name,
-                        cashe.valute.tray.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.uah.charCode,
-                        cashe.valute.uah.nominal,
-                        cashe.valute.uah.name,
-                        cashe.valute.uah.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.usd.charCode,
-                        cashe.valute.usd.nominal,
-                        cashe.valute.usd.name,
-                        cashe.valute.usd.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.uzs.charCode,
-                        cashe.valute.uzs.nominal,
-                        cashe.valute.uzs.name,
-                        cashe.valute.uzs.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.xdr.charCode,
-                        cashe.valute.xdr.nominal,
-                        cashe.valute.xdr.name,
-                        cashe.valute.xdr.value
-                    )
-                )
-                currentFromDb.add(
-                    Currency(
-                        cashe.valute.zar.charCode,
-                        cashe.valute.zar.nominal,
-                        cashe.valute.zar.name,
-                        cashe.valute.zar.value
-                    )
-                )
-
-            }
-        }.start()
-        /*Thread {
-            val ert = currentFromDb.getCurrenciesT()
-            ert.forEach {
-                currencyes.add(it)
+        }
+        Thread {
+            val cache = currentJson.getCurrenciesSync()
+            if (cache != null) {
                 runOnUiThread {
-                    setOotRecycledView()
+                    timeOfLoad.text = cache.date
+                }
+                if (currentFromDb.equals(null)) {
+                    addData(cache)
                 }
             }
-        }.start()*/
+        }.start()
+
         setOotRecycledView()
     }
 
@@ -339,20 +70,289 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-        val adapter = CurrencyAdapter(currencyes, stateClickListener)
-        recyclerView.adapter = adapter
-        //convertorViewModel.initData(this)
-        convertorViewModel.getGurrences().observe(this) { list ->
-            //currencyes.clear()
-            //*list.forEach {
-                //currencyes.add(it)
-            //}*//*
+        val adapter = CurrencyAdapter(currencies, stateClickListener)
+        recyclerView.adapter = adapter //convertorViewModel.initData(this)
+        convertorViewModel.getCurrencies().observe(this) { list ->
+
             recyclerView.adapter = CurrencyAdapter(list, stateClickListener)
             adapter.notifyDataSetChanged()
         }
-
-        //recyclerView.adapter = CurrencyAdapter(currencyes, stateClickListener)
-
-
     }
+
+    private fun addData(cache: DataOfVolute) {
+        currentFromDb.add(
+            Currency(
+                cache.valute.amd.charCode,
+                cache.valute.amd.nominal,
+                cache.valute.amd.name,
+                cache.valute.amd.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.aud.charCode,
+                cache.valute.aud.nominal,
+                cache.valute.aud.name,
+                cache.valute.aud.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.azn.charCode,
+                cache.valute.azn.nominal,
+                cache.valute.azn.name,
+                cache.valute.azn.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.bgn.charCode,
+                cache.valute.bgn.nominal,
+                cache.valute.bgn.name,
+                cache.valute.bgn.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.brl.charCode,
+                cache.valute.brl.nominal,
+                cache.valute.brl.name,
+                cache.valute.brl.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.byn.charCode,
+                cache.valute.byn.nominal,
+                cache.valute.byn.name,
+                cache.valute.byn.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.cad.charCode,
+                cache.valute.cad.nominal,
+                cache.valute.cad.name,
+                cache.valute.cad.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.chf.charCode,
+                cache.valute.chf.nominal,
+                cache.valute.chf.name,
+                cache.valute.chf.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.cny.charCode,
+                cache.valute.cny.nominal,
+                cache.valute.cny.name,
+                cache.valute.cny.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.czk.charCode,
+                cache.valute.czk.nominal,
+                cache.valute.czk.name,
+                cache.valute.czk.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.dkk.charCode,
+                cache.valute.dkk.nominal,
+                cache.valute.dkk.name,
+                cache.valute.dkk.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.eur.charCode,
+                cache.valute.eur.nominal,
+                cache.valute.eur.name,
+                cache.valute.eur.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.gbp.charCode,
+                cache.valute.gbp.nominal,
+                cache.valute.gbp.name,
+                cache.valute.gbp.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.hkd.charCode,
+                cache.valute.hkd.nominal,
+                cache.valute.hkd.name,
+                cache.valute.hkd.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.huf.charCode,
+                cache.valute.huf.nominal,
+                cache.valute.huf.name,
+                cache.valute.huf.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.inr.charCode,
+                cache.valute.inr.nominal,
+                cache.valute.inr.name,
+                cache.valute.inr.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.jpy.charCode,
+                cache.valute.jpy.nominal,
+                cache.valute.jpy.name,
+                cache.valute.jpy.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.kgs.charCode,
+                cache.valute.kgs.nominal,
+                cache.valute.kgs.name,
+                cache.valute.kgs.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.krw.charCode,
+                cache.valute.krw.nominal,
+                cache.valute.krw.name,
+                cache.valute.krw.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.kzt.charCode,
+                cache.valute.kzt.nominal,
+                cache.valute.kzt.name,
+                cache.valute.kzt.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.mdl.charCode,
+                cache.valute.mdl.nominal,
+                cache.valute.mdl.name,
+                cache.valute.mdl.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.nok.charCode,
+                cache.valute.nok.nominal,
+                cache.valute.nok.name,
+                cache.valute.nok.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.pln.charCode,
+                cache.valute.pln.nominal,
+                cache.valute.pln.name,
+                cache.valute.pln.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.ron.charCode,
+                cache.valute.ron.nominal,
+                cache.valute.ron.name,
+                cache.valute.ron.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.sek.charCode,
+                cache.valute.sek.nominal,
+                cache.valute.sek.name,
+                cache.valute.sek.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.sgd.charCode,
+                cache.valute.sgd.nominal,
+                cache.valute.sgd.name,
+                cache.valute.sgd.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.tjs.charCode,
+                cache.valute.tjs.nominal,
+                cache.valute.tjs.name,
+                cache.valute.tjs.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.tmt.charCode,
+                cache.valute.tmt.nominal,
+                cache.valute.tmt.name,
+                cache.valute.tmt.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.tray.charCode,
+                cache.valute.tray.nominal,
+                cache.valute.tray.name,
+                cache.valute.tray.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.uah.charCode,
+                cache.valute.uah.nominal,
+                cache.valute.uah.name,
+                cache.valute.uah.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.usd.charCode,
+                cache.valute.usd.nominal,
+                cache.valute.usd.name,
+                cache.valute.usd.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.uzs.charCode,
+                cache.valute.uzs.nominal,
+                cache.valute.uzs.name,
+                cache.valute.uzs.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.xdr.charCode,
+                cache.valute.xdr.nominal,
+                cache.valute.xdr.name,
+                cache.valute.xdr.value
+            )
+        )
+        currentFromDb.add(
+            Currency(
+                cache.valute.zar.charCode,
+                cache.valute.zar.nominal,
+                cache.valute.zar.name,
+                cache.valute.zar.value
+            )
+        )
+    }
+
+
 }

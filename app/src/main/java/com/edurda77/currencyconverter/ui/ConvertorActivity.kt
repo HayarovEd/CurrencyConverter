@@ -17,13 +17,13 @@ class ConvertorActivity : AppCompatActivity() {
         setContentView(binding.root)
         val nameCurrency = binding.convertorNameCurrency
         val convertorPrice1 = binding.convertorPrice
-        val countRubl1 = binding.convertorCountRubl
-        val resultCurrencyToRubl = binding.convertorResult1
-        val countRubl2 = binding.convertorRublCount
+        val countRuble1 = binding.convertorCountRubl
+        val resultCurrencyToRuble = binding.convertorResult1
+        val countRuble2 = binding.convertorRublCount
         val convertorPrice2 = binding.convertorCourse
-        val resultRublToCurrency = binding.convertorResult2
-        val buttonCurrencyToRubl = binding.convertorCalc1
-        val buttonRublToCurrency = binding.convertorCalc2
+        val resultRubleToCurrency = binding.convertorResult2
+        val buttonCurrencyToRuble = binding.convertorCalc1
+        val buttonRubleToCurrency = binding.convertorCalc2
         val arguments = intent.extras
 
         if (arguments != null) {
@@ -33,15 +33,15 @@ class ConvertorActivity : AppCompatActivity() {
                 .divValueOnNominal(currency.value, currency.nominal)
             convertorPrice1.text = price.toString()
             convertorPrice2.text = price.toString()
-            buttonCurrencyToRubl.setOnClickListener {
-                val count = countRubl1.text.toString().toDouble()
-                resultCurrencyToRubl.text = convertCurrency
-                    .convertToRubl(price, count)
+            buttonCurrencyToRuble.setOnClickListener {
+                val count = countRuble1.text.toString().toDouble()
+                resultCurrencyToRuble.text = convertCurrency
+                    .convertToRuble(price, count)
                     .toString()
             }
-            buttonRublToCurrency.setOnClickListener {
-                val count = countRubl2.text.toString().toDouble()
-                resultRublToCurrency.text = convertCurrency
+            buttonRubleToCurrency.setOnClickListener {
+                val count = countRuble2.text.toString().toDouble()
+                resultRubleToCurrency.text = convertCurrency
                     .convertToCurrency(price, count)
                     .toString()
             }

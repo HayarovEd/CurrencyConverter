@@ -13,8 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="32sp"
-        android:text="@string/currency" />
+        android:textSize="16sp"
+        android:text="@string/currency"
+        android:id="@+id/time_of_load"/>
 
     <Button
         android:layout_width="wrap_content"
