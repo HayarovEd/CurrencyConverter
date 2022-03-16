@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#8BC34A"
+    android:orientation="vertical"
+    android:layout_margin="8sp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/name_currency"
+        android:textSize="16sp"
+        android:text="@string/currency_name"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nominal_currency"
+        android:textSize="16sp"
+        android:text="@string/nominal"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/value_currency"
+        android:textSize="16sp"
+        android:text="@string/value_in_rub"
+        />
+
+</LinearLayout>
