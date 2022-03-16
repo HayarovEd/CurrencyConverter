@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CurrencyConverter</string>
+    <string name="app_name">Конвертор валют</string>
     <string name="currency">Валюты</string>
     <string name="new_courses">Обновить курсы</string>
     <string name="currency_name">Валюта:</string>

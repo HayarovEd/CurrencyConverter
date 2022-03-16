@@ -2,6 +2,7 @@ package com.edurda77.currencyconverter.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,9 +14,9 @@ import com.edurda77.currencyconverter.domain.CurrencyUseCase
 import com.edurda77.currencyconverter.model.ConvertorViewModel
 import com.edurda77.currencyconverter.model.Currency
 import com.edurda77.currencyconverter.model.DataOfVolute
-import java.lang.Thread.sleep
 import java.util.*
 
+const val TIME_UPDATE: Long = 3_600_000
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val convertorViewModel = ConvertorViewModel(this)
@@ -27,12 +28,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
         val timeOfLoad = binding.timeOfLoad
         val updateButton = binding.newCourse
-
         updateButton.setOnClickListener {
             updateData()
-
         }
         Thread {
             val cache = currentJson.getCurrenciesSync()
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }.start()
-
+        autoUpdate()
         setOotRecycledView()
     }
 
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         val adapter = CurrencyAdapter(currencies, stateClickListener)
-        recyclerView.adapter = adapter //convertorViewModel.initData(this)
+        recyclerView.adapter = adapter
         convertorViewModel.getCurrencies().observe(this) { list ->
 
             recyclerView.adapter = CurrencyAdapter(list, stateClickListener)
@@ -364,4 +364,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun autoUpdate() {
+        val myTimer = Timer()
+        val timerTask = object : TimerTask(){
+            override fun run() {
+                updateData()
+            }
+        }
+        myTimer.schedule(timerTask, 2000, TIME_UPDATE )
+    }
+
 }
+
